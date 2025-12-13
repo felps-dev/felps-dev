@@ -482,6 +482,162 @@
       z-index: 0;
       pointer-events: none;
     }
+
+    /* Dino Game Section */
+    .game-section {
+      margin-top: 64px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+      animation: fadeInUp 0.8s ease-out 1s both;
+    }
+
+    .game-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .game-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    .game-subtitle {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    .game-container {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    #game-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .game-ui {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      gap: 16px;
+      font-family: 'Inter', monospace;
+      font-size: 0.875rem;
+      z-index: 10;
+    }
+
+    .game-score-display {
+      color: var(--text-primary);
+      background: var(--bg-secondary);
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .game-score-display span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .game-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 20;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .game-overlay h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .game-overlay p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.875rem;
+      margin-bottom: 16px;
+    }
+
+    .game-overlay .score-display {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .game-controls {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .game-key {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    #game-over {
+      display: none;
+    }
+
+    @media (max-width: 640px) {
+      .game-container {
+        height: 250px;
+        border-radius: 12px;
+      }
+
+      .game-ui {
+        top: 12px;
+        right: 12px;
+        gap: 8px;
+        font-size: 0.75rem;
+      }
+
+      .game-score-display {
+        padding: 6px 10px;
+      }
+
+      .game-overlay h3 {
+        font-size: 1.25rem;
+      }
+
+      .game-controls {
+        gap: 6px;
+      }
+
+      .game-key {
+        padding: 4px 8px;
+        font-size: 0.7rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -566,6 +722,36 @@
           <div class="stat-label">Open Source Projects</div>
         </div>
       </div>
+
+      <!-- Dino Game Section -->
+      <div class="game-section">
+        <div class="game-header">
+          <h2 class="game-title">Take a Break</h2>
+          <p class="game-subtitle">Play while you're here</p>
+        </div>
+        <div class="game-container">
+          <canvas id="game-canvas"></canvas>
+          <div class="game-ui">
+            <div class="game-score-display">Score: <span id="game-score">0</span></div>
+            <div class="game-score-display">Best: <span id="game-high-score">0</span></div>
+          </div>
+          <div class="game-overlay" id="game-start">
+            <h3>Dino Run 3D</h3>
+            <p>Avoid the obstacles and survive as long as you can!</p>
+            <div class="game-controls">
+              <span class="game-key">SPACE - Jump</span>
+              <span class="game-key">DOWN - Duck</span>
+              <span class="game-key">HOLD - Duck</span>
+              <span class="game-key">RELEASE - Jump</span>
+            </div>
+          </div>
+          <div class="game-overlay" id="game-over">
+            <h3>Game Over!</h3>
+            <div class="score-display" id="final-score">0</div>
+            <p>Click or press SPACE to play again</p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <footer class="footer">
@@ -614,5 +800,8 @@
 
   <!-- 3D Background Scene -->
   <script src="scene.js" defer></script>
+
+  <!-- Dino Game -->
+  <script src="game.js" defer></script>
 </body>
 </html>
