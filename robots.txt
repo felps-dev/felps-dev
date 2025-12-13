@@ -1,0 +1,6 @@
+# robots.txt for felps.dev
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://felps.dev/sitemap.xml
