@@ -101,22 +101,22 @@
     // Pointer events work for both mouse and touch
     canvas.addEventListener('mousedown', onPointerDown);
     canvas.addEventListener('mouseup', onPointerUp);
-    canvas.addEventListener('touchstart', onPointerDown, { passive: true });
-    canvas.addEventListener('touchend', onPointerUp, { passive: true });
+    canvas.addEventListener('touchstart', onPointerDown, { passive: false });
+    canvas.addEventListener('touchend', onPointerUp, { passive: false });
     window.addEventListener('resize', onResize);
 
     // Add handlers to overlays for mobile support
     if (startScreen) {
       startScreen.addEventListener('mousedown', onPointerDown);
       startScreen.addEventListener('mouseup', onPointerUp);
-      startScreen.addEventListener('touchstart', onPointerDown, { passive: true });
-      startScreen.addEventListener('touchend', onPointerUp, { passive: true });
+      startScreen.addEventListener('touchstart', onPointerDown, { passive: false });
+      startScreen.addEventListener('touchend', onPointerUp, { passive: false });
     }
     if (gameOverScreen) {
       gameOverScreen.addEventListener('mousedown', onPointerDown);
       gameOverScreen.addEventListener('mouseup', onPointerUp);
-      gameOverScreen.addEventListener('touchstart', onPointerDown, { passive: true });
-      gameOverScreen.addEventListener('touchend', onPointerUp, { passive: true });
+      gameOverScreen.addEventListener('touchstart', onPointerDown, { passive: false });
+      gameOverScreen.addEventListener('touchend', onPointerUp, { passive: false });
     }
 
     // Theme observer
@@ -553,6 +553,11 @@
   }
 
   function onPointerDown(e) {
+    // Prevent text selection on mobile
+    if (e.cancelable && e.type === 'touchstart') {
+      e.preventDefault();
+    }
+
     if (!gameStarted) {
       startGame();
       return;
