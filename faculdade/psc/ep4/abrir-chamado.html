@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Abrir chamado · SGPD</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="proto-banner">Protótipo EP4 · <a href="index.html">voltar ao hub de telas</a></div>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">SG</div>
+      <div>
+        <div>SGPD</div>
+        <div class="brand-meta">DataFlux Analytics</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <div class="nav-section">Atendimento</div>
+      <a href="dashboard.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Dashboard</a>
+      <a href="abrir-chamado.html" class="active"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Novo chamado</a>
+      <a href="base-conhecimento.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Base de conhecimento</a>
+      <div class="nav-section">Conta</div>
+      <a href="login.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sair</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="avatar">FC</div>
+      <div class="user-meta">
+        <span class="name">Felipe Correa</span>
+        <span class="role">Coordenador de TI</span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <h1>Abrir novo chamado</h1>
+        <div class="subtitle"><a href="dashboard.html">Dashboard</a> · Novo chamado</div>
+      </div>
+    </div>
+
+    <form class="card" onsubmit="event.preventDefault(); document.getElementById('toast').classList.add('show'); setTimeout(()=>{window.location.href='dashboard.html';}, 1400);">
+      <h2 style="margin-bottom: 4px;">Detalhes do chamado</h2>
+      <p style="margin-bottom: 18px;">Quanto mais detalhes você fornecer, mais rápida será a triagem feita pelo time N1.</p>
+
+      <div class="form-grid">
+        <div class="field">
+          <label class="label" for="categoria">Categoria<span class="req">*</span></label>
+          <select class="select" id="categoria" required>
+            <option>Selecione…</option>
+            <option>Hardware</option>
+            <option selected>Software</option>
+            <option>Acesso e permissões</option>
+            <option>Rede e VPN</option>
+            <option>Outros</option>
+          </select>
+          <span class="helper">Determina o roteamento inicial e o SLA aplicável.</span>
+        </div>
+
+        <div class="field">
+          <label class="label" for="urgencia">Prioridade<span class="req">*</span></label>
+          <div class="radio-group" id="urgencia">
+            <label class="radio"><input type="radio" name="prio"> Baixa</label>
+            <label class="radio selected"><input type="radio" name="prio" checked> Média</label>
+            <label class="radio"><input type="radio" name="prio"> Alta</label>
+            <label class="radio"><input type="radio" name="prio"> Crítica</label>
+          </div>
+          <span class="helper">Crítica e Alta acionam notificação imediata da coordenação.</span>
+        </div>
+
+        <div class="field span-2">
+          <label class="label" for="titulo">Título<span class="req">*</span></label>
+          <input class="input" id="titulo" placeholder="Ex.: VPN corporativa não conecta após atualização" maxlength="120" required>
+          <span class="helper">Máximo de 120 caracteres. Seja direto.</span>
+        </div>
+
+        <div class="field span-2">
+          <label class="label" for="descricao">Descrição detalhada<span class="req">*</span></label>
+          <textarea class="textarea" id="descricao" placeholder="Descreva o que aconteceu, o que você esperava que acontecesse, em qual passo o problema apareceu e qualquer mensagem de erro vista." required></textarea>
+          <span class="helper">Inclua passos de reprodução, capturas de tela e horários quando possível.</span>
+        </div>
+
+        <div class="field">
+          <label class="label" for="impacto">Quem é impactado?</label>
+          <select class="select" id="impacto">
+            <option>Apenas eu</option>
+            <option selected>Minha equipe (até 10 pessoas)</option>
+            <option>Minha área inteira</option>
+            <option>Toda a empresa</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="label" for="local">Localização</label>
+          <select class="select" id="local">
+            <option selected>Escritório São Paulo</option>
+            <option>Escritório Campinas</option>
+            <option>Escritório Rio de Janeiro</option>
+            <option>Home office</option>
+          </select>
+        </div>
+
+        <div class="field span-2">
+          <label class="label">Anexos</label>
+          <div class="dropzone">
+            <strong style="color: var(--text);">Arraste arquivos aqui ou clique para selecionar</strong><br>
+            Capturas de tela, logs ou documentos (até 25 MB cada)
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <a href="dashboard.html" class="btn btn-ghost">Cancelar</a>
+        <button type="button" class="btn btn-secondary">Salvar como rascunho</button>
+        <button type="submit" class="btn btn-primary">Abrir chamado</button>
+      </div>
+    </form>
+
+    <div style="margin-top: 14px; font-size: 12px; color: var(--text-muted);">
+      Após a abertura, o chamado entra na fila de triagem do N1 e você receberá uma confirmação por e-mail (RF06).
+    </div>
+  </main>
+</div>
+
+<div id="toast" class="toast toast-success">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  Chamado aberto com sucesso · #3042
+</div>
+</body>
+</html>

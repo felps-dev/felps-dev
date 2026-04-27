@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chamado #3041 · SGPD</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="proto-banner">Protótipo EP4 · <a href="index.html">voltar ao hub de telas</a></div>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">SG</div>
+      <div>
+        <div>SGPD</div>
+        <div class="brand-meta">DataFlux Analytics</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <div class="nav-section">Atendimento</div>
+      <a href="dashboard.html" class="active"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Dashboard</a>
+      <a href="abrir-chamado.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Novo chamado</a>
+      <a href="base-conhecimento.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Base de conhecimento</a>
+      <div class="nav-section">Conta</div>
+      <a href="login.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sair</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="avatar">FC</div>
+      <div class="user-meta">
+        <span class="name">Felipe Correa</span>
+        <span class="role">Coordenador de TI</span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <h1>VPN não conecta após atualização do Windows</h1>
+        <div class="subtitle">
+          <a href="dashboard.html">Dashboard</a> · Chamado <span class="code">#3041</span> · aberto há 2h47
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn btn-secondary" onclick="alert('Comentário aberto (mock).');">Adicionar comentário</button>
+        <button id="btn-escalar" class="btn btn-primary" onclick="document.getElementById('modal-escalar').classList.add('open');">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 11 21 7 17 3"/><line x1="21" y1="7" x2="9" y2="7"/><polyline points="7 13 3 17 7 21"/><line x1="3" y1="17" x2="15" y2="17"/></svg>
+          Escalar para N2
+        </button>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 16px; display: flex; gap: 8px; align-items: center;">
+      <span class="badge badge-andamento">Em andamento</span>
+      <span class="priority priority-alta">● Prioridade alta</span>
+      <span class="sla warn">SLA · faltam 1h12</span>
+    </div>
+
+    <div class="layout-2col">
+      <div>
+        <div class="card">
+          <h3>Descrição</h3>
+          <p>
+            Após instalar a atualização cumulativa de segurança do Windows desta semana, a conexão da VPN corporativa para de funcionar a cada 2-3 minutos. O cliente Cisco AnyConnect retorna o erro
+            <span class="code">"Failed to establish a secure connection (10.0.4.21)"</span>. Já testei reiniciar o serviço, reinstalar o cliente e desabilitar temporariamente o antivírus — o problema persiste.
+          </p>
+          <p>
+            Estou em home office, conectada à internet residencial (cabeada, 300 Mb). O time financeiro também relatou o mesmo sintoma na thread #ti-suporte do Slack na manhã de hoje.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Histórico do chamado</h3>
+          <div class="timeline">
+            <div class="timeline-entry">
+              <div class="timeline-dot">M</div>
+              <div class="timeline-body">
+                <span class="who">Marina Albuquerque</span><span class="when">há 2h47 · abriu o chamado</span>
+                <div class="text">Categoria: Rede e VPN · Prioridade: Alta · Localização: Home office</div>
+              </div>
+            </div>
+            <div class="timeline-entry">
+              <div class="timeline-dot muted">SG</div>
+              <div class="timeline-body">
+                <span class="who">Sistema SGPD</span><span class="when">há 2h45 · triagem automática</span>
+                <div class="text">Atribuído ao time N1 · SLA de resposta definido como 4h.</div>
+              </div>
+            </div>
+            <div class="timeline-entry">
+              <div class="timeline-dot">L</div>
+              <div class="timeline-body">
+                <span class="who">Lucas Tavares</span><span class="when">há 2h12 · comentou</span>
+                <div class="text">Tentamos os passos do artigo "VPN não conecta após atualização" da base. Não resolveu. Vou investigar logs do AnyConnect.</div>
+              </div>
+            </div>
+            <div class="timeline-entry">
+              <div class="timeline-dot">L</div>
+              <div class="timeline-body">
+                <span class="who">Lucas Tavares</span><span class="when">há 0h35 · comentou</span>
+                <div class="text">Sintoma se repete em outros 3 colaboradores do financeiro. Suspeita de incompatibilidade entre o patch KB5036893 e o cliente Cisco AnyConnect 4.10. Sugiro escalonar para o N2 para validar mitigação na rede.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Anexos</h3>
+          <p style="margin-bottom: 0;">
+            <a href="#" onclick="event.preventDefault();">📎 anyconnect-log.txt</a> ·
+            <a href="#" onclick="event.preventDefault();">🖼️ erro-conexao.png</a>
+          </p>
+        </div>
+      </div>
+
+      <aside class="side-panel">
+        <div class="card">
+          <h3>Resumo</h3>
+          <div class="meta" style="margin-top: 8px;">
+            <div class="meta-item"><span class="k">Solicitante</span><span class="v">Marina Albuquerque · Financeiro</span></div>
+            <div class="meta-item"><span class="k">Atribuído a</span><span class="v">Lucas Tavares (N1)</span></div>
+            <div class="meta-item"><span class="k">Categoria</span><span class="v">Rede e VPN</span></div>
+            <div class="meta-item"><span class="k">Aberto em</span><span class="v">27/04/2026 · 10:14</span></div>
+            <div class="meta-item"><span class="k">SLA</span><span class="v">Resposta em 4h · Solução em 16h</span></div>
+            <div class="meta-item"><span class="k">Impacto</span><span class="v">Equipe (4 pessoas afetadas)</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Ações rápidas</h3>
+          <div class="action-stack" style="margin-top: 8px;">
+            <button class="btn btn-secondary" onclick="alert('Reatribuição aberta (mock).');">Reatribuir analista</button>
+            <a href="base-conhecimento.html" class="btn btn-secondary" style="text-decoration: none; justify-content: flex-start;">Consultar base de conhecimento</a>
+            <button class="btn btn-secondary" onclick="alert('Marcado como resolvido (mock).');">Marcar como resolvido</button>
+          </div>
+        </div>
+
+        <div class="card" style="background: var(--surface-2); border-style: dashed;">
+          <h4 style="margin-bottom: 6px;">Por que escalar para o N2?</h4>
+          <p style="font-size: 12px; margin-bottom: 0;">A escalação leva o chamado para o time especialista. Use quando a investigação do N1 indicar causa que precisa de acesso a rede, infraestrutura ou alteração de configuração de servidor.</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+</div>
+
+<!-- Modal de confirmação de escalonamento (CU2) -->
+<div id="modal-escalar" class="modal-backdrop">
+  <div class="modal">
+    <h3>Escalar chamado #3041 para o N2?</h3>
+    <p>Esta ação encaminha o chamado para o time de especialistas e notifica o coordenador. Você poderá acompanhar o status, mas o N2 passa a ser o responsável pela resolução.</p>
+    <div class="field">
+      <label class="label" for="motivo">Motivo do escalonamento<span class="req">*</span></label>
+      <select class="select" id="motivo">
+        <option selected>Causa-raiz fora do alcance do N1</option>
+        <option>SLA em risco</option>
+        <option>Solicitação envolve infraestrutura</option>
+        <option>Outro</option>
+      </select>
+    </div>
+    <div class="field">
+      <label class="label" for="obs">Observações para o N2</label>
+      <textarea class="textarea" id="obs" placeholder="Resuma o que já foi tentado e o que precisa ser validado." style="min-height: 80px;"></textarea>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-ghost" onclick="document.getElementById('modal-escalar').classList.remove('open');">Cancelar</button>
+      <button class="btn btn-primary" onclick="document.getElementById('modal-escalar').classList.remove('open'); document.getElementById('toast').classList.add('show'); setTimeout(()=>{window.location.href='dashboard.html';}, 1400);">Confirmar escalonamento</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast toast-success">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  Chamado escalado para o N2 · notificação enviada
+</div>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard de chamados · SGPD</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="proto-banner">Protótipo EP4 · <a href="index.html">voltar ao hub de telas</a></div>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">SG</div>
+      <div>
+        <div>SGPD</div>
+        <div class="brand-meta">DataFlux Analytics</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <div class="nav-section">Atendimento</div>
+      <a href="dashboard.html" class="active">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+        <span>Dashboard</span>
+      </a>
+      <a href="abrir-chamado.html">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <span>Novo chamado</span>
+      </a>
+      <a href="base-conhecimento.html">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <span>Base de conhecimento</span>
+      </a>
+      <div class="nav-section">Análise</div>
+      <a href="#" onclick="event.preventDefault();" style="opacity: .55;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span>Métricas</span>
+      </a>
+      <a href="#" onclick="event.preventDefault();" style="opacity: .55;">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span>Notificações</span>
+      </a>
+      <div class="nav-section">Conta</div>
+      <a href="login.html">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        <span>Sair</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="avatar">FC</div>
+      <div class="user-meta">
+        <span class="name">Felipe Correa</span>
+        <span class="role">Coordenador de TI</span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <h1>Dashboard de chamados</h1>
+        <div class="subtitle">Visão geral dos chamados ativos do Help Desk · atualizado há 2 minutos</div>
+      </div>
+      <div class="topbar-actions">
+        <input class="search" placeholder="Buscar por número, título ou solicitante…">
+        <a href="abrir-chamado.html" class="btn btn-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Novo chamado
+        </a>
+      </div>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi">
+        <span class="label">Abertos hoje</span>
+        <span class="value">14</span>
+        <span class="delta up">+3 vs ontem</span>
+      </div>
+      <div class="kpi">
+        <span class="label">Em andamento</span>
+        <span class="value">23</span>
+        <span class="delta">7 em N1 · 16 em N2</span>
+      </div>
+      <div class="kpi">
+        <span class="label">Em risco de SLA</span>
+        <span class="value">4</span>
+        <span class="delta down">2 críticos</span>
+      </div>
+      <div class="kpi">
+        <span class="label">Resolvidos (7d)</span>
+        <span class="value">62</span>
+        <span class="delta up">tempo médio 4h12</span>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <select class="filter">
+        <option>Status: Todos</option>
+        <option>Aberto</option>
+        <option>Em andamento</option>
+        <option>Escalado</option>
+        <option>Resolvido</option>
+      </select>
+      <select class="filter">
+        <option>Prioridade: Todas</option>
+        <option>Crítica</option>
+        <option>Alta</option>
+        <option>Média</option>
+        <option>Baixa</option>
+      </select>
+      <select class="filter">
+        <option>Atribuído: Todos</option>
+        <option>Mim</option>
+        <option>Equipe N1</option>
+        <option>Equipe N2</option>
+      </select>
+      <select class="filter">
+        <option>SLA: Todos</option>
+        <option>Em risco</option>
+        <option>Estourado</option>
+      </select>
+      <button class="btn btn-ghost" style="margin-left: auto;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+          Atualizar
+      </button>
+    </div>
+
+    <div class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Título</th>
+            <th>Solicitante</th>
+            <th>Status</th>
+            <th>Prioridade</th>
+            <th>SLA</th>
+            <th>Atribuído</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr onclick="window.location.href='chamado-detalhe.html'">
+            <td class="code">#3041</td>
+            <td>VPN não conecta após atualização do Windows</td>
+            <td>Marina Albuquerque</td>
+            <td><span class="badge badge-andamento">Em andamento</span></td>
+            <td><span class="priority priority-alta">Alta</span></td>
+            <td><span class="sla warn">faltam 1h12</span></td>
+            <td>Lucas Tavares (N1)</td>
+          </tr>
+          <tr onclick="window.location.href='chamado-detalhe.html'">
+            <td class="code">#3040</td>
+            <td>Outlook travando ao abrir e-mail com anexo grande</td>
+            <td>Roberto Mendes</td>
+            <td><span class="badge badge-aberto">Aberto</span></td>
+            <td><span class="priority priority-media">Média</span></td>
+            <td><span class="sla">3h45</span></td>
+            <td>—</td>
+          </tr>
+          <tr onclick="window.location.href='chamado-detalhe.html'">
+            <td class="code">#3039</td>
+            <td>Solicitar acesso à pasta SharePoint Comercial</td>
+            <td>Camila Souza</td>
+            <td><span class="badge badge-andamento">Em andamento</span></td>
+            <td><span class="priority priority-baixa">Baixa</span></td>
+            <td><span class="sla">12h20</span></td>
+            <td>Equipe N1</td>
+          </tr>
+          <tr onclick="window.location.href='chamado-detalhe.html'">
+            <td class="code">#3038</td>
+            <td>Servidor de relatórios fora do ar — escalado para N2</td>
+            <td>Daniela Cruz</td>
+            <td><span class="badge badge-escalado">Escalado N2</span></td>
+            <td><span class="priority priority-critica">Crítica</span></td>
+            <td><span class="sla crit">estourado 0h12</span></td>
+            <td>Bruno Carvalho (N2)</td>
+          </tr>
+          <tr onclick="window.location.href='chamado-detalhe.html'">
+            <td class="code">#3037</td>
+            <td>Resetar senha do Active Directory</td>
+            <td>Felipe Correa</td>
+            <td><span class="badge badge-resolvido">Resolvido</span></td>
+            <td><span class="priority priority-baixa">Baixa</span></td>
+            <td><span class="sla">—</span></td>
+            <td>Lucas Tavares (N1)</td>
+          </tr>
+          <tr onclick="window.location.href='chamado-detalhe.html'">
+            <td class="code">#3036</td>
+            <td>Impressora HP do 3º andar imprimindo páginas em branco</td>
+            <td>Júlia Pacheco</td>
+            <td><span class="badge badge-aberto">Aberto</span></td>
+            <td><span class="priority priority-media">Média</span></td>
+            <td><span class="sla">5h05</span></td>
+            <td>—</td>
+          </tr>
+          <tr onclick="window.location.href='chamado-detalhe.html'">
+            <td class="code">#3035</td>
+            <td>Solicitação de licença Office para novo colaborador</td>
+            <td>Eduardo Lima</td>
+            <td><span class="badge badge-andamento">Em andamento</span></td>
+            <td><span class="priority priority-baixa">Baixa</span></td>
+            <td><span class="sla">23h40</span></td>
+            <td>Equipe N1</td>
+          </tr>
+          <tr onclick="window.location.href='chamado-detalhe.html'">
+            <td class="code">#3034</td>
+            <td>Erro 500 ao gerar relatório consolidado mensal</td>
+            <td>Patrícia Nogueira</td>
+            <td><span class="badge badge-escalado">Escalado N2</span></td>
+            <td><span class="priority priority-alta">Alta</span></td>
+            <td><span class="sla warn">faltam 2h30</span></td>
+            <td>Vinícius Almeida (N2)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top: 14px; font-size: 12px; color: var(--text-muted);">Mostrando 8 de 37 chamados ativos · <a href="#" onclick="event.preventDefault();">ver todos</a></p>
+  </main>
+</div>
+</body>
+</html>

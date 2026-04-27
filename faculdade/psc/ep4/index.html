@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SGPD — Protótipo EP4 · Felipe Correa</title>
+<meta name="description" content="Protótipo navegável do Sistema de Gestão de Processos Digitais (SGPD) — Experiência Prática 4 da disciplina Prototipagem de Sistemas Computacionais.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="hub">
+  <section class="hub-hero">
+    <h1>Sistema de Gestão de Processos Digitais (SGPD)</h1>
+    <p>Protótipo navegável de média fidelidade do sistema de Help Desk corporativo da DataFlux Analytics, desenvolvido como entrega da Experiência Prática 4 da disciplina de Prototipagem de Sistemas Computacionais.</p>
+    <div class="hub-meta">
+      <span class="hub-tag">Disciplina · Prototipagem de Sistemas Computacionais</span>
+      <span class="hub-tag">EP4 · Prototipagem funcional e validação</span>
+      <span class="hub-tag">Stack · HTML + CSS + JS</span>
+      <span class="hub-tag">Felipe Correa</span>
+    </div>
+  </section>
+
+  <div class="section-title">
+    <h2>Telas do protótipo</h2>
+    <span class="hint">Cada cartão abre uma tela navegável. As ações entre telas estão funcionando como nos fluxos planejados.</span>
+  </div>
+
+  <div class="screen-grid">
+    <a class="screen-card" href="login.html">
+      <span class="num">01 · AUTENTICAÇÃO</span>
+      <h3>Login corporativo</h3>
+      <p class="desc">Tela de entrada com autenticação via e-mail corporativo. Inclui recuperação de senha e branding DataFlux.</p>
+      <div class="tags">
+        <span class="tag tag-rf">RNF Segurança</span>
+      </div>
+    </a>
+
+    <a class="screen-card" href="dashboard.html">
+      <span class="num">02 · DASHBOARD</span>
+      <h3>Dashboard de chamados</h3>
+      <p class="desc">Visualização e triagem dos chamados do Help Desk. Filtros por status, prioridade e SLA, com KPIs do dia.</p>
+      <div class="tags">
+        <span class="tag tag-rf">RF02 Triagem</span>
+        <span class="tag tag-rf">RF05 Métricas</span>
+      </div>
+    </a>
+
+    <a class="screen-card" href="abrir-chamado.html">
+      <span class="num">03 · ABERTURA</span>
+      <h3>Abrir novo chamado</h3>
+      <p class="desc">Formulário para o solicitante registrar um novo chamado. Categoria, prioridade, descrição livre e anexos.</p>
+      <div class="tags">
+        <span class="tag tag-rf">RF01 Abertura</span>
+        <span class="tag tag-cu">CU1</span>
+      </div>
+    </a>
+
+    <a class="screen-card" href="chamado-detalhe.html">
+      <span class="num">04 · DETALHE</span>
+      <h3>Detalhe do chamado &amp; escalonamento</h3>
+      <p class="desc">Visão completa de um chamado, com timeline, comentários e ação de escalar do nível N1 para o N2.</p>
+      <div class="tags">
+        <span class="tag tag-rf">RF03 Escalonamento</span>
+        <span class="tag tag-rf">RF06 Notificações</span>
+        <span class="tag tag-cu">CU2</span>
+      </div>
+    </a>
+
+    <a class="screen-card" href="base-conhecimento.html">
+      <span class="num">05 · BASE</span>
+      <h3>Base de conhecimento</h3>
+      <p class="desc">Consulta a artigos técnicos para auto-atendimento e apoio aos analistas. Busca por palavra-chave e categorias.</p>
+      <div class="tags">
+        <span class="tag tag-rf">RF04 Base de conhecimento</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="note">
+    <strong>Sobre este protótipo:</strong> as telas são interativas mas os dados são fictícios. O escopo cobre os principais casos de uso (CU1: abrir chamado · CU2: escalar do N1 para o N2) modelados na Experiência Prática 2 e refletem as classes definidas na Experiência Prática 3. As decisões de design seguem padrões consistentes de tipografia, paleta de cores e navegação.
+  </div>
+
+  <footer class="page-footer">
+    Felipe Correa Pereira da Silva · Prototipagem de Sistemas Computacionais · 2026.3 · <a href="https://felps.dev">felps.dev</a>
+  </footer>
+</div>
+</body>
+</html>

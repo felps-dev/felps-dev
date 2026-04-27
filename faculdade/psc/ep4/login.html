@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login · SGPD</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="proto-banner">Protótipo EP4 · <a href="index.html">voltar ao hub de telas</a></div>
+<div class="login-screen">
+  <form class="login-card" onsubmit="event.preventDefault(); window.location.href='dashboard.html';">
+    <div class="login-brand">
+      <div class="brand-mark">SG</div>
+      <div>
+        <div class="name">SGPD</div>
+        <div class="meta">DataFlux Analytics · Help Desk corporativo</div>
+      </div>
+    </div>
+
+    <h2 style="margin-bottom: 4px;">Entrar na sua conta</h2>
+    <p style="margin-bottom: 22px;">Use seu e-mail corporativo para acessar o sistema.</p>
+
+    <div class="field">
+      <label class="label" for="email">E-mail corporativo<span class="req">*</span></label>
+      <input class="input" id="email" type="email" placeholder="seu.nome@dataflux.com.br" value="felipe.correa@dataflux.com.br" required>
+    </div>
+
+    <div class="field">
+      <label class="label" for="senha">Senha<span class="req">*</span></label>
+      <input class="input" id="senha" type="password" placeholder="••••••••" value="********" required>
+      <span class="helper"><a href="#" onclick="event.preventDefault(); alert('Recuperação de senha enviada por e-mail (mock).');">Esqueci minha senha</a></span>
+    </div>
+
+    <div class="field" style="flex-direction: row; align-items: center; gap: 8px;">
+      <input id="lembrar" type="checkbox" style="accent-color: var(--primary);">
+      <label class="label" for="lembrar" style="font-weight: 500; color: var(--text-muted);">Manter sessão por 30 dias neste dispositivo</label>
+    </div>
+
+    <button class="btn btn-primary" type="submit" style="width: 100%; justify-content: center; padding: 11px;">Entrar</button>
+
+    <p style="margin-top: 18px; text-align: center; font-size: 12px;">
+      Problemas no acesso? Fale com o time de TI em <a href="#">ti@dataflux.com.br</a>.
+    </p>
+  </form>
+</div>
+</body>
+</html>
