@@ -34,9 +34,8 @@ const felipe = {
   location:    "Rio de Janeiro, Brazil 🇧🇷",
   experience:  "12+ years",
   founded:     2,
-  focus:       ["LLMs in production", "agent systems", "dev infra"],
-  remote:      true,
-  funFact:     "there's a 3D dino game on felps.dev — go play it"
+  focus:       ["LLMs in production", "MCP servers", "dev tooling"],
+  remote:      true
 };
 ```
 
@@ -49,6 +48,7 @@ const felipe = {
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=000)
+![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white)
 ![Go](https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white)
 ![SQL](https://img.shields.io/badge/SQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)
 
@@ -60,12 +60,13 @@ const felipe = {
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![GraphQL](https://img.shields.io/badge/GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white)
 
-**Frontend**
+**Frontend & Desktop**
 
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
-![Three.js](https://img.shields.io/badge/Three.js-000000?style=for-the-badge&logo=threedotjs&logoColor=white)
 ![Tailwind](https://img.shields.io/badge/Tailwind-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Tauri](https://img.shields.io/badge/Tauri-FFC131?style=for-the-badge&logo=tauri&logoColor=000)
+![Electron](https://img.shields.io/badge/Electron-191970?style=for-the-badge&logo=electron&logoColor=white)
 
 **Data & Infra**
 
@@ -79,7 +80,7 @@ const felipe = {
 
 ![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white)
 ![Anthropic](https://img.shields.io/badge/Anthropic-D4A27F?style=for-the-badge&logo=anthropic&logoColor=white)
-![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white)
+![MCP](https://img.shields.io/badge/MCP-0a0a0b?style=for-the-badge&logoColor=white)
 
 ---
 
@@ -107,9 +108,36 @@ const felipe = {
 ## 🧪 What I'm currently into
 
 - 🤖 **LLMs in production** — squeezing reliability out of probabilistic systems
-- 🧠 **Agent architectures** — tool use, planning, observability
-- ⚡ **Developer infra** — making the team ship 10x faster without trading off quality
-- 🎨 **Side experiments** — Three.js scenes, browser games, weird little tools
+- 🔌 **MCP servers** — building the glue layer between AI assistants and real tools
+- ⚡ **Developer tooling** — small, focused utilities that save the team hours every week
+- 🦀 **Native desktop with Rust + Tauri** — fast, lean apps that feel native on macOS
+
+---
+
+## 📦 Featured open source
+
+<div align="center">
+  <a href="https://github.com/felps-dev/ghtray">
+    <img src="https://github-readme-stats.vercel.app/api/pin/?username=felps-dev&repo=ghtray&hide_border=true&bg_color=0a0a0b&title_color=3B82F6&icon_color=8B5CF6&text_color=a1a1aa" />
+  </a>
+  <a href="https://github.com/felps-dev/mcp-md-to-slack">
+    <img src="https://github-readme-stats.vercel.app/api/pin/?username=felps-dev&repo=mcp-md-to-slack&hide_border=true&bg_color=0a0a0b&title_color=3B82F6&icon_color=8B5CF6&text_color=a1a1aa" />
+  </a>
+</div>
+
+<div align="center">
+  <a href="https://github.com/felps-dev/pysintegra">
+    <img src="https://github-readme-stats.vercel.app/api/pin/?username=felps-dev&repo=pysintegra&hide_border=true&bg_color=0a0a0b&title_color=3B82F6&icon_color=8B5CF6&text_color=a1a1aa" />
+  </a>
+  <a href="https://github.com/felps-dev/nodebal">
+    <img src="https://github-readme-stats.vercel.app/api/pin/?username=felps-dev&repo=nodebal&hide_border=true&bg_color=0a0a0b&title_color=3B82F6&icon_color=8B5CF6&text_color=a1a1aa" />
+  </a>
+</div>
+
+- **[ghtray](https://github.com/felps-dev/ghtray)** — Lightweight macOS tray app for GitHub PR monitoring (Rust + Tauri v2)
+- **[mcp-md-to-slack](https://github.com/felps-dev/mcp-md-to-slack)** — MCP server that converts Markdown to Slack mrkdwn format
+- **[pysintegra](https://github.com/felps-dev/pysintegra)** — Brazilian SINTEGRA fiscal file generator in Python
+- **[nodebal](https://github.com/felps-dev/nodebal)** — Serial communication with retail scales for Node.js
 
 ---
 
@@ -124,8 +152,6 @@ const felipe = {
 </div>
 
 <br>
-
-> 💡 **PS:** [felps.dev](https://felps.dev) has a 3D cosmic background and a playable Dino Run game. Take a break — you've earned it.
 
 <!-- FOOTER -->
 <div align="center">
