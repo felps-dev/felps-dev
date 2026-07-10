@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Play — Dino Run 3D | felps.dev</title>
+    <meta
+      name="description"
+      content="A 3D take on the Chrome dino game, built with Three.js. The easter egg of felps.dev."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://felps.dev/play/" />
+    <link rel="icon" type="image/png" href="/icons/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
+    <link rel="shortcut icon" href="/icons/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #0f0e0c;
+        --bg-soft: #15130f;
+        --ink: #ece7dc;
+        --ink-secondary: #a69d8b;
+        --ink-muted: #71695a;
+        --accent: #d9a45b;
+        --rule: #27231b;
+        --rule-strong: #38321f;
+      }
+
+      [data-theme="light"] {
+        --bg: #f7f4ec;
+        --bg-soft: #efeadd;
+        --ink: #211d14;
+        --ink-secondary: #5f5745;
+        --ink-muted: #8d8471;
+        --accent: #9c6414;
+        --rule: #e0d8c4;
+        --rule-strong: #cdc2a5;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Newsreader", Georgia, serif;
+        background: var(--bg);
+        color: var(--ink);
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+        transition: background-color 0.35s ease, color 0.35s ease;
+      }
+
+      .mono {
+        font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+
+      .wrap {
+        max-width: 46rem;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      header {
+        padding: 2rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+
+      header a,
+      #theme-toggle {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.8rem;
+        color: var(--ink-muted);
+        text-decoration: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        transition: color 0.2s ease;
+      }
+
+      header a:hover,
+      #theme-toggle:hover {
+        color: var(--accent);
+      }
+
+      h1 {
+        font-size: clamp(1.9rem, 6vw, 2.6rem);
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+
+      .subtitle {
+        color: var(--ink-secondary);
+        margin-bottom: 2rem;
+      }
+
+      .subtitle em {
+        color: var(--accent);
+      }
+
+      .game-container {
+        position: relative;
+        width: 100%;
+        height: 340px;
+        background: var(--bg-soft);
+        border: 1px solid var(--rule-strong);
+        border-radius: 8px;
+        overflow: hidden;
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+      }
+
+      #game-canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      .game-ui {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        display: flex;
+        gap: 10px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.78rem;
+        z-index: 10;
+      }
+
+      .game-score-display {
+        color: var(--ink);
+        background: var(--bg);
+        padding: 6px 10px;
+        border-radius: 4px;
+        border: 1px solid var(--rule);
+      }
+
+      .game-score-display span {
+        color: var(--accent);
+        font-weight: 500;
+      }
+
+      .game-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.62);
+        z-index: 20;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .game-overlay h3 {
+        font-size: 1.6rem;
+        font-weight: 500;
+        color: #fff;
+        margin-bottom: 6px;
+      }
+
+      .game-overlay p {
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 0.95rem;
+        margin-bottom: 12px;
+      }
+
+      .game-overlay .score-display {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 2rem;
+        font-weight: 500;
+        color: var(--accent);
+        margin-bottom: 6px;
+      }
+
+      .game-controls {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .game-key {
+        font-family: "IBM Plex Mono", monospace;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 0.72rem;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      #game-over {
+        display: none;
+      }
+
+      footer {
+        padding: 2.5rem 0 3.5rem;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.72rem;
+        color: var(--ink-muted);
+      }
+
+      footer a {
+        color: var(--ink-muted);
+        transition: color 0.2s ease;
+      }
+
+      footer a:hover {
+        color: var(--accent);
+      }
+
+      @media (max-width: 640px) {
+        .game-container {
+          height: 260px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <a href="/">← felps.dev</a>
+        <button id="theme-toggle" aria-label="Toggle dark/light theme">[dark]</button>
+      </header>
+
+      <main>
+        <h1>Dino Run 3D</h1>
+        <p class="subtitle">
+          The easter egg. A Three.js take on the Chrome dino —
+          <em>jump, duck, survive.</em>
+        </p>
+
+        <div class="game-container">
+          <canvas id="game-canvas"></canvas>
+          <div class="game-ui">
+            <div class="game-score-display">Score: <span id="game-score">0</span></div>
+            <div class="game-score-display">Best: <span id="game-high-score">0</span></div>
+          </div>
+          <div class="game-overlay" id="game-start">
+            <h3>Dino Run 3D</h3>
+            <p>Avoid the obstacles and survive as long as you can!</p>
+            <div class="game-controls">
+              <span class="game-key">SPACE — Jump</span>
+              <span class="game-key">DOWN — Duck</span>
+              <span class="game-key">TOUCH: hold to duck, release to jump</span>
+            </div>
+          </div>
+          <div class="game-overlay" id="game-over">
+            <h3>Game Over!</h3>
+            <div class="score-display" id="final-score">0</div>
+            <p>Click or press SPACE to play again</p>
+          </div>
+        </div>
+      </main>
+
+      <footer>
+        <p>Built with Three.js, kept for fun. <a href="/">Back to the serious stuff →</a></p>
+      </footer>
+    </div>
+
+    <script>
+      // Theme: same preference logic as the main page
+      (function () {
+        const toggle = document.getElementById("theme-toggle");
+        const html = document.documentElement;
+
+        function getPreference() {
+          const saved = localStorage.getItem("theme");
+          if (saved) return saved;
+          return window.matchMedia("(prefers-color-scheme: light)").matches
+            ? "light"
+            : "dark";
+        }
+
+        function setTheme(theme, persist) {
+          html.setAttribute("data-theme", theme);
+          toggle.textContent = theme === "dark" ? "[dark]" : "[light]";
+          if (persist) localStorage.setItem("theme", theme);
+        }
+
+        setTheme(getPreference(), false);
+
+        toggle.addEventListener("click", () => {
+          const next =
+            html.getAttribute("data-theme") === "dark" ? "light" : "dark";
+          setTheme(next, true);
+        });
+      })();
+    </script>
+
+    <script src="/game.js" defer></script>
+  </body>
+</html>
