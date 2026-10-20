@@ -43,6 +43,12 @@ if ($method === 'DELETE') {
     foreach (fg_record_files($outcome['record']) as $path) {
         fg_unlink_quietly($path);
     }
+    // An imported photo that is deleted must stay deleted: the Drive sync
+    // decides what is new by what is in the album, so without this the next
+    // cron run brings it straight back.
+    if (!empty($outcome['record']['driveId'])) {
+        fg_drive_tombstone_add($outcome['record']['driveId']);
+    }
     if ($isAdmin) {
         fg_log('admin deleted ' . $id);
     }

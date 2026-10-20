@@ -28,6 +28,7 @@ define('FG_THUMB_DIR', FG_UPLOADS_DIR . '/thumb');
 define('FG_STORE_FILE', FG_DATA_DIR . '/photos.json');
 define('FG_LOCK_FILE', FG_DATA_DIR . '/photos.lock');
 define('FG_LOG_FILE', FG_DATA_DIR . '/api.log');
+define('FG_DRIVE_REMOVED_FILE', FG_DATA_DIR . '/drive-removed.txt');
 define('FG_LOG_MAX_BYTES', 512 * 1024);
 define('FG_PHP_ERROR_LOG', FG_DATA_DIR . '/php-errors.log');
 define('FG_ADMIN_TOKEN_FILE', FG_DATA_DIR . '/admin-token.txt');
@@ -540,10 +541,16 @@ function fg_store_mutate($callback, $soft = false)
         if (!is_array($outcome)) {
             $outcome = array('changed' => false, 'value' => $outcome);
         }
-        if (!empty($outcome['changed']) && !fg_store_write($list)) {
-            return fg_store_failed($soft, 'Não consegui salvar a lista de fotos aqui no servidor. Avisa o Felipe!');
+        if (!empty($outcome['changed'])) {
+            if (!fg_store_write($list)) {
+                return fg_store_failed($soft, 'Não consegui salvar a lista de fotos aqui no servidor. Avisa o Felipe!');
+            }
+            // Only a write that landed makes the caller's files worth keeping.
+            // Clearing unconditionally would disarm the rollback on the paths
+            // that change nothing (a duplicate, a full album), and the files
+            // already on disk would have no record pointing at them.
+            fg_cleanup_clear();
         }
-        fg_cleanup_clear();
         return isset($outcome['value']) ? $outcome['value'] : null;
     } finally {
         flock($handle, LOCK_UN);
@@ -560,6 +567,43 @@ function fg_store_failed($soft, $message)
     }
     fg_fail(500, $message);
     return FG_STORE_FAILED;
+}
+
+/* ------------------------------------------------------------ drive memory */
+
+/**
+ * Drive ids that must never be imported again.
+ *
+ * Without this, deleting an imported photo only frees it to come back on the
+ * next cron run five minutes later — and the documented "zerar o álbum"
+ * reset would re-import the whole folder.
+ */
+function fg_drive_tombstones()
+{
+    if (!is_file(FG_DRIVE_REMOVED_FILE)) {
+        return array();
+    }
+    $lines = @file(FG_DRIVE_REMOVED_FILE, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    if (!is_array($lines)) {
+        return array();
+    }
+    $out = array();
+    foreach ($lines as $line) {
+        $line = trim($line);
+        if ($line !== '') {
+            $out[$line] = true;
+        }
+    }
+    return $out;
+}
+
+function fg_drive_tombstone_add($driveId)
+{
+    $driveId = trim((string) $driveId);
+    if ($driveId === '' || preg_match('/^[A-Za-z0-9_-]{10,80}$/', $driveId) !== 1) {
+        return;
+    }
+    @file_put_contents(FG_DRIVE_REMOVED_FILE, $driveId . "\n", FILE_APPEND | LOCK_EX);
 }
 
 /* ---------------------------------------------------------------------- dto */
@@ -682,6 +726,24 @@ function fg_sweep_orphans()
             $removed++;
         }
     }
+    // A run killed by the OOM killer or the process limit never reaches its
+    // own cleanup, so the half-downloaded file stays in data/ forever.
+    $names = @scandir(FG_DATA_DIR);
+    if (is_array($names)) {
+        foreach ($names as $name) {
+            if (preg_match('/^\.drive-[a-f0-9]{16}\.tmp$/', $name) !== 1) {
+                continue;
+            }
+            $path = FG_DATA_DIR . '/' . $name;
+            $mtime = @filemtime($path);
+            if ($mtime === false || $now - $mtime < FG_ORPHAN_GRACE) {
+                continue;
+            }
+            fg_unlink_quietly($path);
+            $removed++;
+        }
+    }
+
     if ($removed > 0) {
         fg_log('sweep removed ' . $removed . ' orphan file(s)');
     }
