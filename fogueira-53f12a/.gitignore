@@ -1,0 +1,29 @@
+# Fotos enviadas e o indice vivem SO no servidor.
+# O deploy e git pull: arquivo nao rastreado sobrevive ao pull, mas ninguem
+# deve commitar foto nem data/photos.json por acidente.
+uploads/original/*
+uploads/display/*
+uploads/thumb/*
+data/*
+
+# ... menos o que protege e segura a pasta.
+!uploads/original/.gitkeep
+!uploads/original/.htaccess
+!uploads/original/.user.ini
+!uploads/original/index.html
+!uploads/original/index.php
+!uploads/display/.gitkeep
+!uploads/display/.htaccess
+!uploads/display/.user.ini
+!uploads/display/index.html
+!uploads/display/index.php
+!uploads/thumb/.gitkeep
+!uploads/thumb/.htaccess
+!uploads/thumb/.user.ini
+!uploads/thumb/index.html
+!uploads/thumb/index.php
+!data/.gitkeep
+!data/.htaccess
+!data/.user.ini
+!data/index.html
+!data/index.php

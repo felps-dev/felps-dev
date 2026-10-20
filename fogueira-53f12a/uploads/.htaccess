@@ -1,0 +1,49 @@
+# Served images only. Whatever lands in here is data, never code.
+
+Options -Indexes
+
+# PHP off. On LiteSpeed the real switch is .user.ini (engine = Off) next to
+# this file: there is no mod_php there, so the guarded php_flag blocks below
+# never fire. They stay for an Apache/mod_php host — and they stay GUARDED,
+# because a bare php_flag on a server without mod_php 500s the whole folder.
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php5.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+
+<IfModule mod_mime.c>
+    RemoveHandler .php .phtml .phar .php3 .php4 .php5 .php7 .php8 .pl .py .cgi .shtml
+    RemoveType .php .phtml .phar
+</IfModule>
+
+<FilesMatch "(\.(php|phtml|phar|php[0-9]|pl|py|cgi|shtml|htaccess|user\.ini)$|^error_log$|^php_errorlog$)">
+    SetHandler None
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# The display and thumb copies are immutable: their name contains a random id.
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+</IfModule>
+<IfModule mod_headers.c>
+    <FilesMatch "\.(webp|jpe?g|png|gif)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Robots-Tag "noindex, nofollow, noimageindex"
+</IfModule>
