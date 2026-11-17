@@ -638,6 +638,21 @@
         // ---------- Download ----------
         const isTouch = matchMedia("(pointer: coarse)").matches;
 
+        // +1 no contador (anônimo: só a resolução e se é a 1ª vez deste navegador)
+        function countDownload(res) {
+          let first = false;
+          try {
+            first = !localStorage.getItem("gtavitrend_counted");
+            localStorage.setItem("gtavitrend_counted", "1");
+          } catch {}
+          try {
+            const body = new Blob([JSON.stringify({ res, first })], { type: "application/json" });
+            if (!(navigator.sendBeacon && navigator.sendBeacon("./api/count.php", body))) {
+              fetch("./api/count.php", { method: "POST", body, keepalive: true }).catch(() => {});
+            }
+          } catch {}
+        }
+
         dlBtn.addEventListener("click", async () => {
           if (!photos[0] || !photos[1]) return;
           const W = parseInt(resSel.value, 10);
@@ -659,6 +674,7 @@
             if (isTouch && navigator.canShare && navigator.canShare({ files: [file] })) {
               try {
                 await navigator.share({ files: [file] });
+                countDownload(W);
                 toast("Pronto! Agora é só postar 🌴");
                 return;
               } catch (err) {
@@ -672,6 +688,7 @@
             a.click();
             a.remove();
             setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+            countDownload(W);
             toast("Imagem baixada! Agora é só postar 🌴");
           } catch (e) {
             toast("Não deu pra gerar nessa resolução. Tenta uma menor.");
