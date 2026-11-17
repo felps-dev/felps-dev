@@ -332,6 +332,11 @@
           <span>Suas fotos não são enviadas pra lugar nenhum: tudo acontece no seu próprio navegador.</span>
         </p>
         <p>
+          <strong>Estatísticas:</strong> pra eu acompanhar a trend, cada visita e download registra dados técnicos
+          básicos da requisição: endereço IP, localização aproximada a partir do IP, navegador e aparelho, idioma, tamanho
+          da tela e de onde você veio. Esses dados ficam só comigo, não são vendidos nem usados pra anúncio.
+        </p>
+        <p>
           <strong>Aviso:</strong> este é um projeto independente, feito por fã e sem fins lucrativos. Não tenho nenhuma
           relação com a Rockstar Games, a Take-Two Interactive ou a franquia Grand Theft Auto, e este site não é oficial,
           patrocinado nem endossado por eles. É só uma ferramenta pra participar de uma trend da internet, sem qualquer
@@ -638,20 +643,45 @@
         // ---------- Download ----------
         const isTouch = matchMedia("(pointer: coarse)").matches;
 
-        // +1 no contador (anônimo: só a resolução e se é a 1ª vez deste navegador)
-        function countDownload(res) {
-          let first = false;
+        // ---------- Estatística (visita/download) ----------
+        const loadedAt = performance.now();
+        const store = {
+          get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+          set(k, v) { try { localStorage.setItem(k, v); } catch {} },
+        };
+        let vid = store.get("gtavitrend_vid");
+        if (!vid) {
+          vid = Array.from(crypto.getRandomValues(new Uint8Array(8)), (b) => b.toString(16).padStart(2, "0")).join("");
+          store.set("gtavitrend_vid", vid);
+        }
+        const qs = new URLSearchParams(location.search);
+        const meta = {
+          vid,
+          ref: document.referrer || "",
+          utm: { source: qs.get("utm_source") || "", medium: qs.get("utm_medium") || "", campaign: qs.get("utm_campaign") || "" },
+          lang: navigator.language || "",
+          tz: (() => { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch { return ""; } })(),
+          screen: `${screen.width}x${screen.height}@${Math.round((devicePixelRatio || 1) * 100) / 100}`,
+          viewport: `${innerWidth}x${innerHeight}`,
+          touch: isTouch,
+        };
+
+        function track(type, extra = {}) {
           try {
-            first = !localStorage.getItem("gtavitrend_counted");
-            localStorage.setItem("gtavitrend_counted", "1");
-          } catch {}
-          try {
-            const body = new Blob([JSON.stringify({ res, first })], { type: "application/json" });
+            const body = new Blob([JSON.stringify({ type, ...meta, ms: Math.round(performance.now() - loadedAt), ...extra })], { type: "application/json" });
             if (!(navigator.sendBeacon && navigator.sendBeacon("./api/count.php", body))) {
               fetch("./api/count.php", { method: "POST", body, keepalive: true }).catch(() => {});
             }
           } catch {}
         }
+
+        function countDownload(res, method) {
+          const first = !store.get("gtavitrend_counted");
+          store.set("gtavitrend_counted", "1");
+          track("download", { res, first, method });
+        }
+
+        track("view");
 
         dlBtn.addEventListener("click", async () => {
           if (!photos[0] || !photos[1]) return;
@@ -674,7 +704,7 @@
             if (isTouch && navigator.canShare && navigator.canShare({ files: [file] })) {
               try {
                 await navigator.share({ files: [file] });
-                countDownload(W);
+                countDownload(W, "share");
                 toast("Pronto! Agora é só postar 🌴");
                 return;
               } catch (err) {
@@ -688,7 +718,7 @@
             a.click();
             a.remove();
             setTimeout(() => URL.revokeObjectURL(a.href), 4000);
-            countDownload(W);
+            countDownload(W, "file");
             toast("Imagem baixada! Agora é só postar 🌴");
           } catch (e) {
             toast("Não deu pra gerar nessa resolução. Tenta uma menor.");
